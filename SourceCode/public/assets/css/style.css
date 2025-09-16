@@ -28,6 +28,96 @@ header{
     height: 45px;
     padding: 10px 0 10px 0;
 }
+.floating-navbar{
+    width: 350px;
+    height: 60px;
+    position: fixed;
+    bottom: 20px;
+    background-color: #262626;
+    z-index: 10;
+    left: 50%;
+    transform: translate(-50%, 0);
+    border-radius: 20px;
+    box-shadow: inset 0 0 15px rgba(135, 135, 135, .1), 0 0 18px 3px rgba(0, 0, 0, .3);
+    padding: 5px 10px;
+}
+.list-menu{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.list-menu>.menu{
+    list-style: none;
+    margin-right: 50px;
+}
+.list-menu>.active{
+    background-color: #3572EF;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+}
+.menu>a{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+}
+.menu>a>i{
+    font-size: 1.3rem !important;
+    color: #9A9A9A !important;
+}
+.menu>a>span{
+    margin-top: -10px;
+    font-size: 0.9rem;
+    color: #9A9A9A !important;
+}
+.active>a>i{
+    color: #fff !important;
+}
+.active>a>span{
+    color: #fff !important;
+}
+.floating-music-active{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.floating-music-player{
+    width: 350px;
+    height: 80px;
+    position: fixed;
+    bottom: 80px;
+    background-color: #262626;
+    z-index: 10;
+    left: 50%;
+    transform: translate(-50%, 0);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: inset 0 0 15px rgba(135, 135, 135, .1), 0 0 18px 3px rgba(0, 0, 0, .3);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+.floating-music-player>img{
+    width: 60px;
+    height: 60px;
+}
+.floating-music-detail{
+    margin-left: 10px;
+}
+.floating-music-detail>p{
+    margin-bottom: -5px;
+    overflow: hidden;
+}
+.floating-music-detail>span{
+    font-size: 0.8rem;
+    margin-top: -1px;
+}
+.floating-music-player>.played-music-play{
+    position: absolute;
+    right: 10px;
+}
 .menu-section{
     display: flex;
     align-items: center;
@@ -369,4 +459,10 @@ header{
     border: 3px solid #ffff;
     cursor: pointer;
 }
-.
+
+
+@media screen and (max-width: 768px) {
+    .card-room-music{
+        display: none;
+    }
+}

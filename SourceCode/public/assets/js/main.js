@@ -89,7 +89,6 @@ $(document).ready(function() {
         let isFirstPlay = document.getElementById('isMusicFirstPlay').value;
         let song = document.getElementById('musicPlayer');
         let ctrlMusic = document.getElementById('playControllMusic');
-        console.log(isFirstPlay)
 
         if (isFirstPlay == true){
             duration = "0:00";
