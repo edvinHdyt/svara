@@ -22,6 +22,7 @@ $(document).ready(function() {
     //     }
     // });
 
+
     document.addEventListener('mouseout', () => {
         let strId = event.target.dataset["id"];
 
@@ -39,6 +40,9 @@ $(document).ready(function() {
         let strId = event.target.dataset['id'];
 
         switch (strId) {
+            case "floatingPlayControllMusic":
+                playPauseMusic(true);
+                break;
             case "musicNext":
                 manipulationTabMusic("next");
                 break;
@@ -46,7 +50,7 @@ $(document).ready(function() {
                 manipulationTabMusic("prev");
                 break;
             case "playControllMusic":
-                playPauseMusic(event);
+                playPauseMusic(false);
                 break;
             case "topArtistNext":
                 manipulationTabTopArtist("next");
@@ -54,26 +58,44 @@ $(document).ready(function() {
             case "topArtistPrev":
                 manipulationTabTopArtist("prev");
                 break;
+            case "showHideProfileDropdown":
+                manipulationProfileDropdown();
+                break;
 
             default:
                 break;
         }
+
+        if (strId != "showHideProfileDropdown"){
+            let elm = document.getElementById("profileDropdown");
+
+            if (elm.classList.contains("d-block")){
+                elm.classList.remove('d-block');
+                elm.classList.add('d-none');
+            }
+        }
+
+
     });
 
     let progress = document.getElementById('musicProgres');
     progress.onchange = (e) => {
         let song = document.getElementById("musicPlayer");
         let ctrlMusic = document.getElementById('playControllMusic');
-        song.play();
-        song.currentTime = progress.value;
-        ctrlMusic.classList.remove('bi-play-fill');
-        ctrlMusic.classList.add('bi-pause-fill');
+
+        if (song.duration != NaN || song.duration != undefined){
+            song.play();
+            song.currentTime = progress.value;
+            ctrlMusic.classList.remove('bi-play-fill');
+            ctrlMusic.classList.add('bi-pause-fill');
+        }
     }
 
     const initial = () => {
         let song = document.getElementById("musicPlayer");
         let progress = document.getElementById('musicProgres');
         let finishDuration = document.getElementById('musicTimeFinish');
+
         song.onloadedmetadata = () => {
             progress.max = song.duration;
             progress.value = song.currentTime;
@@ -84,11 +106,23 @@ $(document).ready(function() {
     }
 
     initial();
+
+    const manipulationProfileDropdown = () => {
+        let elm = document.getElementById("profileDropdown");
+
+        if (elm.classList.contains("d-none")){
+            elm.classList.remove("d-none");
+            elm.classList.add("d-block");
+        } else {
+            elm.classList.remove("d-block");
+            elm.classList.add("d-none");
+        }
+    }
     var duration;
-    const musicDurationProggress = () => {
+    const musicDurationProggress = (isFloating) => {
         let isFirstPlay = document.getElementById('isMusicFirstPlay').value;
         let song = document.getElementById('musicPlayer');
-        let ctrlMusic = document.getElementById('playControllMusic');
+        let ctrlMusic = isFloating == false ? document.getElementById('playControllMusic') : document.getElementById('floatingPlayControllMusic');
 
         if (isFirstPlay == true){
             duration = "0:00";
@@ -121,14 +155,14 @@ $(document).ready(function() {
         }
     }
 
-    const musicProgressManipulation = () => {
-        let slider = document.getElementById('musicProgres');
-        let val = slider.value;
-        let color = "linear-gradient(to right, #3572EF " +333+"px, #474747 0px)";
+    // const musicProgressManipulation = () => {
+    //     let slider = document.getElementById('musicProgres');
+    //     let val = slider.value;
+    //     let color = "linear-gradient(to right, #3572EF " +333+"px, #474747 0px)";
 
-        slider.style.background = color;
+    //     slider.style.background = color;
 
-    }
+    // }
 
    const manipulationTabMusic = (action) => {
         let elms = document.getElementsByClassName('music-tabs');
@@ -204,30 +238,32 @@ $(document).ready(function() {
     }
 
     var isPause = false;
-    const playPauseMusic = (e) => {
+    const playPauseMusic = (isFloating) => {
         let song = document.getElementById("musicPlayer");
-        let ctrlMusic = document.getElementById('playControllMusic');
+        let ctrlMusic = isFloating == false ? document.getElementById('playControllMusic') : document.getElementById('floatingPlayControllMusic');
         let progress = document.getElementById('musicProgres');
 
-        if (ctrlMusic.classList.contains("bi-play-fill")){
-            song.play();
-            ctrlMusic.classList.remove('bi-play-fill');
-            ctrlMusic.classList.add('bi-pause-fill');
+         if (song.duration != NaN || song.duration != undefined){
+             if (ctrlMusic.classList.contains("bi-play-fill")){
+                song.play();
+                ctrlMusic.classList.remove('bi-play-fill');
+                ctrlMusic.classList.add('bi-pause-fill');
 
-            if (song.play()){
-                setInterval(() => {
-                    progress.value = Math.round(song.currentTime);
-                    // musicProgressManipulation();
-                }, 500);
-                musicDurationProggress();
-                document.getElementById('isMusicFirstPlay').value = false;
+                if (song.play()){
+                    setInterval(() => {
+                        progress.value = Math.round(song.currentTime);
+                        // musicProgressManipulation();
+                    }, 500);
+                    musicDurationProggress(isFloating);
+                    document.getElementById('isMusicFirstPlay').value = false;
+                }
+            }else {
+                song.pause();
+                ctrlMusic.classList.remove('bi-pause-fill');
+                ctrlMusic.classList.add('bi-play-fill');
             }
-
-        }else {
-            song.pause();
-            ctrlMusic.classList.remove('bi-pause-fill');
-            ctrlMusic.classList.add('bi-play-fill');
         }
+
     }
 
     const searchElm = (e) => {

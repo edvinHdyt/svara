@@ -1,29 +1,6 @@
 @extends('layouts.base')
 
 @section('app-body')
-<div class="container">
-    <header>
-        <nav class="nav-header">
-            <div class="search-section">
-                <input type="text" name="search" class="search-input" placeholder="Search">
-                <div class="search-icon">
-                    <i class="bi bi-search"></i>
-                </div>
-            </div>
-            <div class="menu-section">
-                <div class="history-section">
-                    <button class="btn btn-history">
-                        <i class="bi bi-clock-history"></i>
-                        History
-                    </button>
-                </div>
-                <div class="profile-section">
-                    <i class="bi bi-person-fill"></i>
-                </div>
-            </div>
-        </nav>
-    </header>
-</div>
 <div class="weekly-banner">
     <div class="container ">
         <div class="row">
@@ -197,12 +174,15 @@
             <div class="col-md-4">
                 <div class="card-room-music">
                     <div class="card-room-music-body">
-                        <img src="{{asset('image/music-profile/aku-milikmu.jpeg')}}" alt="" class="played-music-picture">
+                        <img src="{{asset('image/music-profile/aku-milikmu.jpeg')}}" alt="" class="played-music-picture d-none" id="pictMusicPlayedRoom">
+                        <div class="no-played-music-picture">
+                            <i class="bi bi-music-note-beamed"></i>
+                        </div>
                         <div class="played-music-detail">
-                            <p class="music-title">
-                                Aku Milikmu
+                            <p class="music-title" id="cardRoomMusicTitle">
+                                No music is played
                             </p>
-                            <span class="artist">Dewa 19</span>
+                            <span class="artist" id="cardRoomArtist"></span>
                             <div class="played-music-action">
                                 <div class="played-music-prev">
                                     <i class="bi bi-fast-forward-fill"></i>
@@ -217,11 +197,11 @@
                             <div class="music-duration">
                                 <div class="music-time">
                                     <span class="start" id="musicTimeStart">0:00</span>
-                                    <span class="finish" id="musicTimeFinish"></span>
+                                    <span class="finish" id="musicTimeFinish">0:00</span>
                                 </div>
-                                <input type="range" name="" id="musicProgres" class="music-progress" data-id="musicProgress">
+                                <input type="range" name="" id="musicProgres" class="music-progress" data-id="musicProgress" value="0">
                                 <audio controls id="musicPlayer" class="d-none">
-                                    <source src="{{asset('media/AkuMilikmuDewa19.mp3')}}" type="audio/mpeg">
+                                    <source type="audio/mpeg" id="musicSource">
                                 </audio>
                             </div>
                         </div>
