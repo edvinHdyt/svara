@@ -19,7 +19,10 @@
                     <div class="profile-dropdown d-none" id="profileDropdown">
                         <ul class="menu-dropdown">
                             <li class="list-menu-dropdown">
-                                <a href="">
+                                {{-- <form action="{{route("route.greeting")}}" method="get">
+                                    <button type="submit">Profile</button>
+                                </form> --}}
+                                <a href="{{route("route.profile_view")}}">
                                     <i class="bi bi-person-fill"></i>
                                     <span>John Doe</span>
                                 </a>
@@ -50,7 +53,7 @@
 <nav class="floating-navbar" id="floatingNavbar">
     <ul class="list-menu">
         <li class="menu active">
-            <a href="">
+            <a href="{{route("route.dashboard_view")}}">
                 <i class="bi bi-house-fill"></i>
                 <span>Home</span>
             </a>
