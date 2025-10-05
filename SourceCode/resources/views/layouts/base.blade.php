@@ -15,7 +15,9 @@
     @include('layouts.partials.navbar')
     @yield('app-body')
 
+    <footer>
 
+    </footer>
     <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('vendor/fontawesome/js/all.min.js')}}"></script>

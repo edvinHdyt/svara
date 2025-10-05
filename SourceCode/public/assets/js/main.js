@@ -38,7 +38,6 @@ $(document).ready(function() {
 
     document.addEventListener('click', () => {
         let strId = event.target.dataset['id'];
-
         switch (strId) {
             case "floatingPlayControllMusic":
                 playPauseMusic(true);
@@ -79,15 +78,17 @@ $(document).ready(function() {
     });
 
     let progress = document.getElementById('musicProgres');
-    progress.onchange = (e) => {
-        let song = document.getElementById("musicPlayer");
-        let ctrlMusic = document.getElementById('playControllMusic');
+    if (progress != undefined){
+        progress.onchange = (e) => {
+            let song = document.getElementById("musicPlayer");
+            let ctrlMusic = document.getElementById('playControllMusic');
 
-        if (song.duration != NaN || song.duration != undefined){
-            song.play();
-            song.currentTime = progress.value;
-            ctrlMusic.classList.remove('bi-play-fill');
-            ctrlMusic.classList.add('bi-pause-fill');
+            if (song.duration != NaN || song.duration != undefined){
+                song.play();
+                song.currentTime = progress.value;
+                ctrlMusic.classList.remove('bi-play-fill');
+                ctrlMusic.classList.add('bi-pause-fill');
+            }
         }
     }
 
@@ -96,18 +97,20 @@ $(document).ready(function() {
         let progress = document.getElementById('musicProgres');
         let finishDuration = document.getElementById('musicTimeFinish');
 
-        song.onloadedmetadata = () => {
-            progress.max = song.duration;
-            progress.value = song.currentTime;
-            var min =Math.floor(Math.floor(song.duration) / 60);
-            var sec = Math.floor(song.duration) % 60;
-            finishDuration.innerHTML = min + ":" + sec;
+        if (song != undefined){
+            song.onloadedmetadata = () => {
+                progress.max = song.duration;
+                progress.value = song.currentTime;
+                var min =Math.floor(Math.floor(song.duration) / 60);
+                var sec = Math.floor(song.duration) % 60;
+                finishDuration.innerHTML = min + ":" + sec;
+            }
         }
     }
 
     initial();
 
-    const manipulationProfileDropdown = () => {
+    function manipulationProfileDropdown() {
         let elm = document.getElementById("profileDropdown");
 
         if (elm.classList.contains("d-none")){
@@ -118,8 +121,9 @@ $(document).ready(function() {
             elm.classList.add("d-none");
         }
     }
+
     var duration;
-    const musicDurationProggress = (isFloating) => {
+    function musicDurationProggress (isFloating)  {
         let isFirstPlay = document.getElementById('isMusicFirstPlay').value;
         let song = document.getElementById('musicPlayer');
         let ctrlMusic = isFloating == false ? document.getElementById('playControllMusic') : document.getElementById('floatingPlayControllMusic');
@@ -164,7 +168,7 @@ $(document).ready(function() {
 
     // }
 
-   const manipulationTabMusic = (action) => {
+   function manipulationTabMusic(action)  {
         let elms = document.getElementsByClassName('music-tabs');
         let currentIndex = 0;
         let manipulationIndex = 0;
@@ -206,7 +210,7 @@ $(document).ready(function() {
         }
    }
 
-   const manipulationTabTopArtist = (action) => {
+   function manipulationTabTopArtist(action){
         if(action == "next"){
             let pos = $("#topArtist").scrollLeft() + 200;
             $("#topArtist").animate({
@@ -220,7 +224,7 @@ $(document).ready(function() {
         }
    }
 
-    const musicPlayIconManipulationAdd = (e) => {
+    function musicPlayIconManipulationAdd(e) {
         let elm = searchElm(e);
         if (elm.classList.contains('d-none')){
             elm.classList.remove('d-none');
@@ -228,7 +232,7 @@ $(document).ready(function() {
         }
     }
 
-    const musicPlayIconManipulationRemove = (e) => {
+    function musicPlayIconManipulationRemove(e){
         let elm = searchElm(e);
 
         if (elm.classList.contains('d-block')){
@@ -238,7 +242,7 @@ $(document).ready(function() {
     }
 
     var isPause = false;
-    const playPauseMusic = (isFloating) => {
+    function playPauseMusic(isFloating) {
         let song = document.getElementById("musicPlayer");
         let ctrlMusic = isFloating == false ? document.getElementById('playControllMusic') : document.getElementById('floatingPlayControllMusic');
         let progress = document.getElementById('musicProgres');
@@ -266,7 +270,7 @@ $(document).ready(function() {
 
     }
 
-    const searchElm = (e) => {
+    function searchElm(e) {
         let elm = e.target;
 
 
