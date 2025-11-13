@@ -7,7 +7,7 @@
     <title>Svara</title>
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
-    <link rel="stylesheet" href="{{asset('vendor/fontawesome/css/all.min.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('vendor/fontawesome/css/all.min.css')}}"> --}}
     <link rel="stylesheet" href="{{asset('vendor/bootstrap-icons/font/bootstrap-icons.min.css')}}">
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"> --}}
 </head>
@@ -20,7 +20,7 @@
     </footer>
     <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('vendor/fontawesome/js/all.min.js')}}"></script>
+    {{-- <script src="{{asset('vendor/fontawesome/js/all.min.js')}}"></script> --}}
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/js/all.min.js"></script> --}}
     <script src="{{asset('js/main.js')}}"></script>
 </body>
