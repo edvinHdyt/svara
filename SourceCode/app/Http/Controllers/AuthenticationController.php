@@ -12,7 +12,10 @@ class AuthenticationController extends Controller
     }
 
     public function showRegister(Request $request){
+        $baseVariable = $this->basevariable();
+        // dd($baseVariable["genders"]->gender[0]);
         $baseVariable['title'] = "Register";
+
         return view('register', $baseVariable);
     }
 }

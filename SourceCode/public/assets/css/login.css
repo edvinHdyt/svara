@@ -81,7 +81,21 @@ body{
     width: clamp(30vh, 40vw, 60vh);
     height: 60vh;
 }
-
+.btn-primary{
+    background-color: #a6c0fe;
+    outline: none;
+    border: 0.5px solid #a6c0fe;
+}
+.btn-primary:hover{
+    background-color: #f68084;
+    outline: none;
+    border: 0.5px solid #f68084;
+}
+.btn-primary:focus{
+    background-color: #a6c0fe !important;
+    outline: none;
+    border: 0.5px solid #a6c0fe !important;
+}
 @media screen and (min-width: 1200px) {
     .right-side-container{
         display: flex;
